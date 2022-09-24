@@ -11,7 +11,16 @@ export default defineConfig({
 		strictPort: true,
 	},
 
+	// To make use of env variables
 	envPrefix: ["VITE_"],
+
+	build: {
+		target: ["es2021", "chrome100", "safari13"],
+		// don't minify for debug builds
+		minify: !process.env.VITE_DEBUG ? "esbuild" : false,
+		// produce sourcemaps for debug builds
+		sourcemap: !!process.env.VITE_DEBUG,
+	},
 
 	resolve: {
 		alias: {
